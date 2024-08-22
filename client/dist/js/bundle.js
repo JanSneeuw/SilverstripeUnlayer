@@ -105,11 +105,10 @@ function UnlayerField(_ref) {
       setTemplateJson(design);
     });
   };
-  const onLoad = () => {
-    emailEditorRef.current.editor.loadDesign(templateJson);
-  };
+  const onLoad = () => {};
   const onReady = () => {
-    console.log('onReady');
+    console.log('Editor is ready', templateJson);
+    emailEditorRef.current.editor.loadDesign(JSON.parse(templateJson));
   };
   return React.createElement("div", null, React.createElement("div", null, React.createElement("button", {
     onClick: exportHtml
