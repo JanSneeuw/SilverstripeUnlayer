@@ -93,7 +93,7 @@ function UnlayerField(_ref) {
   }, [value]);
   (0, _react.useEffect)(() => {
     if (typeof onAutofill === 'function') {
-      onAutofill(name, templateJson);
+      onAutofill(name, JSON.stringify(templateJson));
     }
   }, [templateJson]);
   const exportHtml = () => {
@@ -102,7 +102,7 @@ function UnlayerField(_ref) {
         design,
         html
       } = data;
-      onAutofill(name, design);
+      setTemplateJson(design);
     });
   };
   const onLoad = () => {

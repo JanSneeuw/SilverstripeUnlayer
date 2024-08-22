@@ -11,14 +11,14 @@ export default function UnlayerField({onAutofill, name, value}) {
 
   useEffect(() => {
     if (typeof onAutofill === 'function') {
-      onAutofill(name, templateJson);
+      onAutofill(name, JSON.stringify(templateJson));
     }
   }, [templateJson]);
 
   const exportHtml = () => {
     emailEditorRef.current.editor.exportHtml((data) => {
       const { design, html } = data;
-      onAutofill(name, design);
+      setTemplateJson(design);
     });
   };
 
