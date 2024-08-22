@@ -18,7 +18,7 @@ export default function UnlayerField({onAutofill, name, value}) {
   const exportHtml = () => {
     emailEditorRef.current.editor.exportHtml((data) => {
       const { design, html } = data;
-      console.log('exportHtml', html);
+      onAutofill(name, design);
     });
   };
 
