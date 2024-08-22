@@ -1,5 +1,5 @@
 {
-    "name": "silverstripe-unlayer",
+    "name": "violet88/silverstripe-unlayer",
     "description": "Adds an unlayer field to the SilverStripe CMS",
     "type": "silverstripe-vendormodule",
     "keywords": [
