@@ -1,17 +1,17 @@
 import {useEffect, useRef, useState} from "react";
 import EmailEditor from 'react-email-editor';
 
-export default function UnlayerField({onAutofill, name}) {
+export default function UnlayerField({onAutofill, name, value}) {
   const emailEditorRef = useRef(null);
   const [templateJson, setTemplateJson] = useState(null);
 
   useEffect(() => {
-    console.log('UnlayerField', name);
-  }, []);
+    setTemplateJson(value);
+  }, [value]);
 
   useEffect(() => {
     if (typeof onAutofill === 'function') {
-      onAutofill
+      onAutofill(name, templateJson);
     }
   }, [templateJson]);
 
@@ -26,8 +26,8 @@ export default function UnlayerField({onAutofill, name}) {
     // editor instance is created
     // you can load your template here;
     // const templateJson = {};
-    // emailEditorRef.current.editor.loadDesign(templateJson);
-  }
+    emailEditorRef.current.editor.loadDesign(templateJson);
+  };
 
   const onReady = () => {
     // editor is ready

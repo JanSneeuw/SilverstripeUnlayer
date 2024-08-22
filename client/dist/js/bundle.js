@@ -83,16 +83,17 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 function UnlayerField(_ref) {
   let {
     onAutofill,
-    name
+    name,
+    value
   } = _ref;
   const emailEditorRef = (0, _react.useRef)(null);
   const [templateJson, setTemplateJson] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {
-    console.log('UnlayerField', name);
-  }, []);
+    setTemplateJson(value);
+  }, [value]);
   (0, _react.useEffect)(() => {
     if (typeof onAutofill === 'function') {
-      onAutofill;
+      onAutofill(name, templateJson);
     }
   }, [templateJson]);
   const exportHtml = () => {
@@ -104,7 +105,9 @@ function UnlayerField(_ref) {
       console.log('exportHtml', html);
     });
   };
-  const onLoad = () => {};
+  const onLoad = () => {
+    emailEditorRef.current.editor.loadDesign(templateJson);
+  };
   const onReady = () => {
     console.log('onReady');
   };
@@ -135,14 +138,23 @@ var _UnlayerField = _interopRequireDefault(__webpack_require__(/*! ../components
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 window.document.addEventListener('DOMContentLoaded', () => {
-  console.log('registering components');
   _jquery.default.entwine('ss', $ => {
     $('.unlayer').entwine({
       onmatch() {
         const Component = (0, _Injector.loadComponent)('UnlayerField');
         const schemaState = this.data('state');
-        _reactDom.default.render(_react.default.createElement(_UnlayerField.default, schemaState), this[0]);
+        const setValue = (fieldName, value) => {
+          const input = document.querySelector(`input[name="${fieldName}"]`);
+          if (!input) {
+            return;
+          }
+          input.value = value;
+        };
+        _reactDom.default.render(_react.default.createElement(_UnlayerField.default, _extends({}, schemaState, {
+          onAutofill: setValue
+        })), this[0]);
       },
       onunmatch() {
         _reactDom.default.unmountComponentAtNode(this[0]);
