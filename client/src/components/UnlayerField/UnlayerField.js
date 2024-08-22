@@ -26,7 +26,7 @@ export default function UnlayerField({onAutofill, name, value}) {
     // editor instance is created
     // you can load your template here;
     // const templateJson = {};
-    emailEditorRef.current.editor.loadDesign(templateJson);
+    emailEditorRef.current.editor.loadDesign(JSON.parse(templateJson));
   };
 
   const onReady = () => {
