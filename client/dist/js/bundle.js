@@ -13,7 +13,6 @@
 var _registerComponents = _interopRequireDefault(__webpack_require__(/*! boot/registerComponents */ "./client/src/boot/registerComponents.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 window.document.addEventListener('DOMContentLoaded', () => {
-  console.log('registering components');
   (0, _registerComponents.default)();
 });
 
@@ -81,8 +80,21 @@ exports["default"] = UnlayerField;
 var _react = __webpack_require__(/*! react */ "react");
 var _reactEmailEditor = _interopRequireDefault(__webpack_require__(/*! react-email-editor */ "./node_modules/react-email-editor/dist/index.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function UnlayerField() {
+function UnlayerField(_ref) {
+  let {
+    onAutofill,
+    name
+  } = _ref;
   const emailEditorRef = (0, _react.useRef)(null);
+  const [templateJson, setTemplateJson] = (0, _react.useState)(null);
+  (0, _react.useEffect)(() => {
+    console.log('UnlayerField', name);
+  }, []);
+  (0, _react.useEffect)(() => {
+    if (typeof onAutofill === 'function') {
+      onAutofill;
+    }
+  }, [templateJson]);
   const exportHtml = () => {
     emailEditorRef.current.editor.exportHtml(data => {
       const {

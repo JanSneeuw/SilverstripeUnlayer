@@ -1,8 +1,19 @@
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import EmailEditor from 'react-email-editor';
 
-export default function UnlayerField() {
+export default function UnlayerField({onAutofill, name}) {
   const emailEditorRef = useRef(null);
+  const [templateJson, setTemplateJson] = useState(null);
+
+  useEffect(() => {
+    console.log('UnlayerField', name);
+  }, []);
+
+  useEffect(() => {
+    if (typeof onAutofill === 'function') {
+      onAutofill
+    }
+  }, [templateJson]);
 
   const exportHtml = () => {
     emailEditorRef.current.editor.exportHtml((data) => {
