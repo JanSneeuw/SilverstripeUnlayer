@@ -13,6 +13,7 @@
 var _registerComponents = _interopRequireDefault(__webpack_require__(/*! boot/registerComponents */ "./client/src/boot/registerComponents.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 window.document.addEventListener('DOMContentLoaded', () => {
+  console.log('registering components');
   (0, _registerComponents.default)();
 });
 
