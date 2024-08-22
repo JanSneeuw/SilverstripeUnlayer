@@ -19,12 +19,15 @@ window.document.addEventListener('DOMContentLoaded', () => {
 
           // If there's no input field then we'll return early
           if (!input) {
+            console.log('No input field found for field', fieldName);
             return;
           }
 
+          console.log('Setting value for field', fieldName, value);
+
           // Now we can set the field value
           input.value = value;
-        }
+        };
 
         ReactDOM.render(<UnlayerField {...schemaState} onAutofill={setValue}/>, this[0]);
       },

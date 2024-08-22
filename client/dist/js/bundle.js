@@ -102,7 +102,7 @@ function UnlayerField(_ref) {
         design,
         html
       } = data;
-      console.log('exportHtml', html);
+      onAutofill(name, design);
     });
   };
   const onLoad = () => {
@@ -148,8 +148,10 @@ window.document.addEventListener('DOMContentLoaded', () => {
         const setValue = (fieldName, value) => {
           const input = document.querySelector(`input[name="${fieldName}"]`);
           if (!input) {
+            console.log('No input field found for field', fieldName);
             return;
           }
+          console.log('Setting value for field', fieldName, value);
           input.value = value;
         };
         _reactDom.default.render(_react.default.createElement(_UnlayerField.default, _extends({}, schemaState, {
